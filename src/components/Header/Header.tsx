@@ -22,6 +22,23 @@ const Header = () => {
       <nav
         className={`${styles.nav} ${isMobileMenuOpen ? styles.mobileOpen : ""}`}
       >
+        <button
+          className={styles.hamburger}
+          aria-label="Toggle menu"
+          aria-expanded={isMobileMenuOpen}
+          aria-controls="menu"
+          onClick={toggleMobileMenu}
+        >
+          <div
+            className={`${styles.bar} ${isMobileMenuOpen ? styles.barOpen : ""}`}
+          ></div>
+          <div
+            className={`${styles.bar} ${isMobileMenuOpen ? styles.barOpen : ""}`}
+          ></div>
+          <div
+            className={`${styles.bar} ${isMobileMenuOpen ? styles.barOpen : ""}`}
+          ></div>
+        </button>
         <ul className={styles.navList}>
           <li className={styles.navItem}>
             <Link href="/">HOME</Link>
@@ -43,9 +60,6 @@ const Header = () => {
           </li>
         </ul>
       </nav>
-      <button className={styles.mobileMenuButton} onClick={toggleMobileMenu}>
-        {isMobileMenuOpen ? "Close" : "Menu"}
-      </button>
     </header>
   );
 };
