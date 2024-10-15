@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import Header from "@/components/Header/Header";
 
 const instrumentSerif = localFont({
   src: "./fonts/InstrumentSerif-Regular.woff2",
@@ -25,6 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${instrumentSerif.className} antialiased`}>
+        <Header />
         {children}
       </body>
     </html>
