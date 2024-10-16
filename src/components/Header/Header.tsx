@@ -13,6 +13,9 @@ const Header = () => {
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
+  const closeMenu = () => {
+    setIsMobileMenuOpen(false);
+  };
 
   return (
     <header className={`${styles.header} container`}>
@@ -51,25 +54,38 @@ const Header = () => {
           }`}
         >
           <li className={styles.navItem}>
-            <Link href="/">HOME</Link>
+            <Link onClick={closeMenu} href="/">
+              HOME
+            </Link>
           </li>
           <li className={styles.navItem}>
-            <Link href="/bio">BIO</Link>
+            <Link onClick={closeMenu} href="/bio">
+              BIO
+            </Link>
           </li>
           <li className={styles.navItem}>
-            <Link href="/exhibitions">EXHIBITIONS</Link>
+            <Link onClick={closeMenu} href="/exhibitions">
+              EXHIBITIONS
+            </Link>
           </li>
           <li className={styles.navItem}>
-            <Link href="/projects">PROJECTS</Link>
+            <Link onClick={closeMenu} href="/projects">
+              PROJECTS
+            </Link>
           </li>
           <li className={styles.navItem}>
-            <Link href="/subscribe">SUBSCRIBE</Link>
+            <Link onClick={closeMenu} href="/subscribe">
+              SUBSCRIBE
+            </Link>
           </li>
           <li className={styles.navItem}>
-            <Link href="/contact">CONTACT</Link>
+            <Link onClick={closeMenu} href="/contact">
+              CONTACT
+            </Link>
           </li>
           <li>
             <a
+              onClick={closeMenu}
               href="https://www.instagram.com/ise.claudio/"
               target="_blank"
               rel="noopener noreferrer"
