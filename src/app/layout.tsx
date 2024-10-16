@@ -27,7 +27,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${instrumentSerif.className} antialiased`}>
         <Header />
-        {children}
+        <main className="container">{children}</main>
       </body>
     </html>
   );

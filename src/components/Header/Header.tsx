@@ -57,7 +57,7 @@ const Header = () => {
             <Link href="/bio">BIO</Link>
           </li>
           <li className={styles.navItem}>
-            <Link href="/exhibtions">EXHIBTIONS</Link>
+            <Link href="/exhibitions">EXHIBITIONS</Link>
           </li>
           <li className={styles.navItem}>
             <Link href="/projects">PROJECTS</Link>
