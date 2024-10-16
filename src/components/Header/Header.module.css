@@ -84,7 +84,7 @@
   display: flex;
 }
 
-@media (min-width: 768px) {
+@media screen(md) {
   .header {
     height: 100px;
   }
@@ -112,8 +112,7 @@
     gap: 3rem;
   }
 
-.navList li:last-child {
-  margin-top: 0;
-}
-
+  .navList li:last-child {
+    margin-top: 0;
+  }
 }
