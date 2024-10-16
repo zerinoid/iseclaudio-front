@@ -1,12 +1,12 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
-import "./globals.css";
-import Header from "@/components/Header/Header";
+import type { Metadata } from 'next'
+import localFont from 'next/font/local'
+import './globals.css'
+import Header from '@/components/Header/Header'
 
 const instrumentSerif = localFont({
-  src: "./fonts/InstrumentSerif-Regular.woff2",
-  variable: "--font-geist-sans",
-});
+  src: './fonts/InstrumentSerif-Regular.woff2',
+  variable: '--font-geist-sans'
+})
 /*
  * const instrumentItalic = localFont({
  *   src: "./fonts/InstrumentSerif-Italic.woff2",
@@ -14,14 +14,14 @@ const instrumentSerif = localFont({
  * });
  *  */
 export const metadata: Metadata = {
-  title: "Ise Claudio",
-  description: "Generado por",
-};
+  title: 'Ise Claudio',
+  description: 'Generado por'
+}
 
 export default function RootLayout({
-  children,
+  children
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang="en">
@@ -30,5 +30,5 @@ export default function RootLayout({
         <main className="container">{children}</main>
       </body>
     </html>
-  );
+  )
 }

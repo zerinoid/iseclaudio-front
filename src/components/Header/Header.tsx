@@ -1,21 +1,21 @@
-"use client";
+'use client'
 
-import { useState } from "react";
-import Image from "next/image";
-import styles from "./Header.module.css";
-import Link from "next/link";
-import logo from "#/ise_logo.svg";
-import instagram from "#/instagram.svg";
+import { useState } from 'react'
+import Image from 'next/image'
+import styles from './Header.module.css'
+import Link from 'next/link'
+import logo from '#/ise_logo.svg'
+import instagram from '#/instagram.svg'
 
 const Header = () => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
+    setIsMobileMenuOpen(!isMobileMenuOpen)
+  }
   const closeMenu = () => {
-    setIsMobileMenuOpen(false);
-  };
+    setIsMobileMenuOpen(false)
+  }
 
   return (
     <header className={`${styles.header} container`}>
@@ -34,23 +34,23 @@ const Header = () => {
         >
           <div
             className={`${styles.bar} ${
-              isMobileMenuOpen ? styles.barOpen : ""
+              isMobileMenuOpen ? styles.barOpen : ''
             }`}
           ></div>
           <div
             className={`${styles.bar} ${
-              isMobileMenuOpen ? styles.barOpen : ""
+              isMobileMenuOpen ? styles.barOpen : ''
             }`}
           ></div>
           <div
             className={`${styles.bar} ${
-              isMobileMenuOpen ? styles.barOpen : ""
+              isMobileMenuOpen ? styles.barOpen : ''
             }`}
           ></div>
         </button>
         <ul
           className={`${styles.navList} ${
-            isMobileMenuOpen ? styles.mobileOpen : ""
+            isMobileMenuOpen ? styles.mobileOpen : ''
           }`}
         >
           <li className={styles.navItem}>
@@ -96,7 +96,7 @@ const Header = () => {
         </ul>
       </nav>
     </header>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

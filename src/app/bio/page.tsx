@@ -16,5 +16,5 @@ export default function Bio() {
         dictum nunc justo sit amet elit.
       </p>
     </>
-  );
+  )
 }
