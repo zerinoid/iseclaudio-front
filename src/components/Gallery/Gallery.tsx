@@ -115,9 +115,7 @@ export default function Gallery() {
           )
         })}
 
-        <div ref={footer} className={styles.footer}>
-          <h1>All rights reserved © 2024</h1>
-        </div>
+        <div ref={footer} className={styles.footer}></div>
       </div>
     </>
   )
