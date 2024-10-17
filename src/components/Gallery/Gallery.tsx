@@ -72,7 +72,7 @@ export default function Gallery() {
         end: '+=400vh',
         scrub: 1,
         onUpdate: self => {
-          let opacityProgress = self.progress
+          const opacityProgress = self.progress
           heroRef.current.style.opacity = String(1 - opacityProgress)
         }
       })
@@ -104,7 +104,7 @@ export default function Gallery() {
             <div
               key={idx}
               ref={el => {
-                pinnedRef.current[idx] = el
+                pinnedRef.current[idx] = el as HTMLDivElement
               }}
               className={`${styles.card} ${className}`}
             >
