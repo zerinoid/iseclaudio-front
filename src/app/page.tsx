@@ -1,3 +1,5 @@
+import Showcase from '@/components/showcase/Showcase'
+
 export default function Home() {
-  return <h1>Home</h1>
+  return <Showcase />
 }
