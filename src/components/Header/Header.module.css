@@ -100,6 +100,7 @@
   .nav {
     display: flex;
     justify-content: flex-end;
+    padding: 1rem 0;
   }
 
   .navList {
@@ -108,7 +109,7 @@
     flex-direction: row;
     width: fit-content;
     height: initial;
-    padding: 1rem;
+    padding: 1rem 0;
     gap: 3rem;
   }
 
