@@ -1,13 +1,9 @@
-import { FC, LegacyRef } from 'react'
+import { FC } from 'react'
 import styles from './Footer.module.css'
 
-interface Props {
-  ref: LegacyRef<HTMLDivElement>
-}
-
-const Footer: FC<Props> = ({ ref }) => {
+const Footer: FC = () => {
   return (
-    <footer ref={ref} className={styles.footer}>
+    <footer className={styles.footer}>
       <p>All rights reserved © 2024</p>
     </footer>
   )
