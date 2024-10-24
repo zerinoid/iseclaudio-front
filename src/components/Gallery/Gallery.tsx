@@ -12,7 +12,6 @@ export default function Gallery() {
   const container = useRef(null as unknown as HTMLDivElement)
   const footer = useRef(null as unknown as HTMLDivElement)
   const lastCard = useRef(null as unknown as HTMLDivElement)
-  const heroRef = useRef(null as unknown as HTMLDivElement)
   const pinnedRef = useRef([] as HTMLDivElement[])
 
   /* const { contextSafe } = useGSAP({ scope: container }); */
@@ -65,17 +64,6 @@ export default function Gallery() {
           )
         }
       )
-
-      ScrollTrigger.create({
-        trigger: document.body,
-        start: 'top top',
-        end: '+=400vh',
-        scrub: 1,
-        onUpdate: self => {
-          const opacityProgress = self.progress
-          heroRef.current.style.opacity = String(1 - opacityProgress)
-        }
-      })
     },
     { scope: container }
   )
@@ -91,12 +79,7 @@ export default function Gallery() {
 
   return (
     <>
-      <div className={styles.list}></div>
       <div ref={container}>
-        <div className={`${styles.hero} ${styles.pinned}`}>
-          <h1 ref={heroRef}>Suspendisse potenti.</h1>
-        </div>
-
         {array.map((pic, idx, arr) => {
           const className =
             idx === arr.length - 1 ? styles.scroll : styles.pinned
