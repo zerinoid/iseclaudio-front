@@ -28,7 +28,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${instrumentSerif.className} antialiased`}>
         <Header />
-        <main className="container">{children}</main>
+        <main className="container pt-5 flex-auto">{children}</main>
         <Footer />
       </body>
     </html>
