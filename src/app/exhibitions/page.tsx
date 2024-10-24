@@ -11,10 +11,12 @@ const data = [
 export default function Exhibitions() {
   return (
     <div className="md:grid grid-cols-2">
-      <div className="hidden md:block sticky">
-        <ul>
+      <div className="hidden md:block relative">
+        <ul className="sticky top-7">
           {data.map(exhibition => (
-            <li key={exhibition.id}>{exhibition.name}</li>
+            <li className="mb-9" key={exhibition.id}>
+              <button className="uppercase text-4xl">{exhibition.name}</button>
+            </li>
           ))}
         </ul>
       </div>
