@@ -4,9 +4,14 @@
 <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
  width="546.000000pt" height="802.000000pt" viewBox="0 0 546.000000 802.000000"
  preserveAspectRatio="xMidYMid meet">
-
+        <style>
+          :root { color: #171717 }
+          @media (prefers-color-scheme: dark) {
+            :root { color: #ededed }
+          }
+        </style>
 <g transform="translate(0.000000,802.000000) scale(0.100000,-0.100000)"
-fill="#fff" stroke="none">
+fill="currentColor" stroke="none">
 <path d="M2205 7994 c-186 -34 -388 -122 -554 -242 -164 -117 -347 -314 -460
 -494 -34 -53 -59 -79 -124 -124 -267 -188 -502 -505 -642 -869 -287 -743 -267
 -1882 50 -2864 l54 -165 -55 -58 c-216 -234 -373 -534 -434 -832 -110 -536 27
