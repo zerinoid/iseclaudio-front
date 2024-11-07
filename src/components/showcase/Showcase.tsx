@@ -5,6 +5,7 @@ import styles from './Showcase.module.css'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import Link from 'next/link'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
@@ -98,21 +99,38 @@ export default function Showcase() {
         </div>
 
         {array.map((pic, idx, arr) => {
-          const className =
-            idx === arr.length - 1 ? styles.scroll : styles.pinned
-          return (
-            <div
-              key={idx}
-              ref={el => {
-                pinnedRef.current[idx] = el as HTMLDivElement
-              }}
-              className={`${styles.card} ${className}`}
-            >
-              <div className={styles.img}>
-                <Image src={pic} alt={pic} width={800} height={700} />
+          if (idx === arr.length - 1) {
+            return (
+              <div
+                key={idx}
+                ref={el => {
+                  pinnedRef.current[idx] = el as HTMLDivElement
+                }}
+                className={`${styles.card}  ${styles.scroll}`}
+              >
+                <div className={styles.buttons}>
+                  <Link href="/exhibitions">EXHIBITIONS</Link>
+                  <Link href="/projects">projects</Link>
+                  <Link href="/contact">contact</Link>
+                  <Link href="/bio">bio</Link>
+                </div>
               </div>
-            </div>
-          )
+            )
+          } else {
+            return (
+              <div
+                key={idx}
+                ref={el => {
+                  pinnedRef.current[idx] = el as HTMLDivElement
+                }}
+                className={`${styles.card} ${styles.pinned}`}
+              >
+                <div className={styles.img}>
+                  <Image src={pic} alt={pic} width={800} height={700} />
+                </div>
+              </div>
+            )
+          }
         })}
 
         <div ref={footer} className={styles.footer}></div>
