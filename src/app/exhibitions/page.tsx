@@ -8,7 +8,7 @@ export default function Exhibitions() {
       <div className="hidden md:block relative">
         <div className="sticky top-7">
           <h1 className="font-bold text-5xl mb-12">EXHIBITIONS:</h1>
-          <WorkListing works={exhibitions} kind="EXHIBITIONS" />
+          <WorkListing works={exhibitions} />
         </div>
       </div>
       <Gallery />
