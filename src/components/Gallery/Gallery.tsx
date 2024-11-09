@@ -1,17 +1,19 @@
 'use client'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import Image from 'next/image'
 import styles from './Gallery.module.css'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import exhibitions from '@/mocks/exhibitions'
+import exhibitions, { Work } from '@/mocks/exhibitions'
 import useScreenSize from '@/hooks/useScreenSize'
 import Breakpoints from '@/models/Breakpoints'
+import WorkListing from '../WorkListing/WorkListing'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
 export default function Gallery() {
+  const [currentGallery, setCurrentGallery] = useState<Work>(exhibitions[0])
   const container = useRef(null as unknown as HTMLDivElement)
   const footer = useRef(null as unknown as HTMLDivElement)
   const lastCard = useRef(null as unknown as HTMLDivElement)
@@ -74,19 +76,10 @@ export default function Gallery() {
     { scope: container }
   )
 
-  const array = [
-    '/temp/img1.jpg',
-    '/temp/img2.jpg',
-    '/temp/img3.jpg',
-    '/temp/img4.jpg',
-    '/temp/img5.jpg',
-    '/temp/img6.jpg'
-  ]
-
   return (
     <>
       <div ref={container}>
-        {array.map((pic, idx, arr) => {
+        {currentGallery.images.map((pic, idx, arr) => {
           const className = !isMd
             ? styles.pinned
             : idx === arr.length - 1
@@ -114,15 +107,10 @@ export default function Gallery() {
             }}
             className={`${styles.card} ${styles.scroll} bg-background`}
           >
-            <ul className="p-8">
-              {exhibitions.map(exhibition => (
-                <li className="mb-9" key={exhibition.id}>
-                  <button className="uppercase text-4xl">
-                    {exhibition.name}
-                  </button>
-                </li>
-              ))}
-            </ul>
+            <h1 className="font-bold text-5xl mb-12">EXHIBITIONS:</h1>
+            <div className="p-8">
+              <WorkListing works={exhibitions} />
+            </div>
           </div>
         ) : null}
         <div ref={footer} className={styles.footer}></div>
