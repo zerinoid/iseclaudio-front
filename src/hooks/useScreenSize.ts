@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react'
 
 type ScreenSize = {
-  width: number
-  height: number
+  width: number | undefined
+  height: number | undefined
 }
 
-const useScreenSize = (): number[] => {
+const useScreenSize = (): Array<number | undefined> => {
   const [screenSize, setScreenSize] = useState<ScreenSize>({
-    width: window?.innerWidth,
-    height: window?.innerHeight
+    width: undefined,
+    height: undefined
   })
 
   useEffect(() => {

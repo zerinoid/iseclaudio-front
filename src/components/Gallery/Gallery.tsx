@@ -21,7 +21,7 @@ export default function Gallery() {
   const pinnedRef = useRef([] as HTMLDivElement[])
 
   const [screenWidth] = useScreenSize()
-  const isMd = screenWidth > Breakpoints.md
+  const isMd = screenWidth! > Breakpoints.md
 
   /* const { contextSafe } = useGSAP({ scope: container }); */
   useGSAP(
@@ -101,7 +101,7 @@ export default function Gallery() {
           )
         })}
 
-        {screenWidth <= Breakpoints.md ? (
+        {screenWidth! <= Breakpoints.md ? (
           <div
             ref={el => {
               pinnedRef.current[pinnedRef.current.length] = el as HTMLDivElement
