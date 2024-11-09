@@ -5,7 +5,8 @@ import styles from './Gallery.module.css'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import exhibitions, { Work } from '@/mocks/exhibitions'
+import exhibitions from '@/mocks/exhibitions'
+import Work from '@/models/Work'
 import useScreenSize from '@/hooks/useScreenSize'
 import Breakpoints from '@/models/Breakpoints'
 import WorkListing from '../WorkListing/WorkListing'
@@ -13,7 +14,7 @@ import WorkListing from '../WorkListing/WorkListing'
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
 export default function Gallery() {
-  const [currentGallery, setCurrentGallery] = useState<Work>(exhibitions[0])
+  const [currentGallery] = useState<Work>(exhibitions[0])
   const container = useRef(null as unknown as HTMLDivElement)
   const footer = useRef(null as unknown as HTMLDivElement)
   const lastCard = useRef(null as unknown as HTMLDivElement)
