@@ -82,12 +82,12 @@ export default function Showcase() {
   )
 
   const array = [
-    '/temp/img1.jpg',
-    '/temp/img2.jpg',
-    '/temp/img3.jpg',
-    '/temp/img4.jpg',
-    '/temp/img5.jpg',
-    '/temp/img6.jpg'
+    '/exhib1/img1.jpg',
+    '/exhib1/img2.jpg',
+    '/exhib1/img3.jpg',
+    '/exhib1/img4.jpg',
+    '/exhib1/img5.jpg',
+    '/exhib1/img6.jpg'
   ]
 
   return (
