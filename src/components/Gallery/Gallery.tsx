@@ -10,10 +10,16 @@ import Work from '@/models/Work'
 import useScreenSize from '@/hooks/useScreenSize'
 import Breakpoints from '@/models/Breakpoints'
 import WorkListing from '../WorkListing/WorkListing'
+import { useWork } from '@/context/WorkContext'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
+type Props = {
+  images: string[]
+}
+
 export default function Gallery() {
+  const { currentExhibition } = useWork()
   const [currentGallery] = useState<Work>(exhibitions[0])
   const container = useRef(null as unknown as HTMLDivElement)
   const footer = useRef(null as unknown as HTMLDivElement)
@@ -22,6 +28,9 @@ export default function Gallery() {
 
   const [screenWidth] = useScreenSize()
   const isMd = screenWidth! > Breakpoints.md
+
+  const images = currentExhibition.images
+  console.log(images, '### images  ###')
 
   /* const { contextSafe } = useGSAP({ scope: container }); */
   useGSAP(
@@ -80,7 +89,7 @@ export default function Gallery() {
   return (
     <>
       <div ref={container}>
-        {currentGallery.images.map((pic, idx, arr) => {
+        {images.map((pic, idx, arr) => {
           const className = !isMd
             ? styles.pinned
             : idx === arr.length - 1

@@ -28,7 +28,7 @@ const exhibitions: Work[] = [
     name: 'Sed Do Eiusmod',
     id: 3,
     images: [
-      '/exhib3/img1.png',
+      '/exhib3/img1.jpg',
       '/exhib3/img2.png',
       '/exhib3/img3.jpg',
       '/exhib3/img4.jpg'
