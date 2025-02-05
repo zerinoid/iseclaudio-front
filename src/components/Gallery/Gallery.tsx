@@ -81,7 +81,7 @@ export default function Gallery() {
   )
 
   return (
-    <>
+    <section>
       <div ref={container}>
         {images.map((pic, idx, arr) => {
           const className = !isMd
@@ -119,6 +119,6 @@ export default function Gallery() {
         ) : null}
         <div ref={footer} className={styles.footer}></div>
       </div>
-    </>
+    </section>
   )
 }
