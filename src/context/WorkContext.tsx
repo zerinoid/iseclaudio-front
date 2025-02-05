@@ -40,7 +40,7 @@ const WorkProvider: FC<IWorkProvider> = ({ children }) => {
 function useWork(): IWorkContext {
   const context = useContext(WorkContext)
   if (!context) {
-    throw new Error('useWork must be used within an EquipeProvider')
+    throw new Error('useWork must be used within an WorkProvider')
   }
   return context
 }

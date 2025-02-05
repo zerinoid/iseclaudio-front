@@ -1,12 +1,11 @@
 'use client'
-import { useRef, useState } from 'react'
+import { useRef } from 'react'
 import Image from 'next/image'
 import styles from './Gallery.module.css'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import exhibitions from '@/mocks/exhibitions'
-import Work from '@/models/Work'
 import useScreenSize from '@/hooks/useScreenSize'
 import Breakpoints from '@/models/Breakpoints'
 import WorkListing from '../WorkListing/WorkListing'
@@ -14,13 +13,8 @@ import { useWork } from '@/context/WorkContext'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
-type Props = {
-  images: string[]
-}
-
 export default function Gallery() {
   const { currentExhibition } = useWork()
-  const [currentGallery] = useState<Work>(exhibitions[0])
   const container = useRef(null as unknown as HTMLDivElement)
   const footer = useRef(null as unknown as HTMLDivElement)
   const lastCard = useRef(null as unknown as HTMLDivElement)
