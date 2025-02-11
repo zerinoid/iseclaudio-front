@@ -16,7 +16,7 @@ const WorkListing: FC<Props> = ({ works }) => {
             onClick={() => setCurrentExhibition(work)}
             className="uppercase text-4xl hover:text-5xl decoration-double"
           >
-            {work.name}
+            {work.images?.length > 0 ? work?.name : null}
           </button>
         </li>
       ))}

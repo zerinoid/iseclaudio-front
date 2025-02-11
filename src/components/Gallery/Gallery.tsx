@@ -83,7 +83,7 @@ export default function Gallery() {
   return (
     <section>
       <div ref={container}>
-        {images.map((pic, idx, arr) => {
+        {images?.map((pic, idx, arr) => {
           const className = !isMd
             ? styles.pinned
             : idx === arr.length - 1

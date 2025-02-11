@@ -21,7 +21,8 @@ const exhibitions: Work[] = [
       '/exhib2/img2.jpg',
       '/exhib2/img3.jpg',
       '/exhib2/img4.png',
-      '/exhib2/img5.jpg'
+      '/exhib2/img5.jpg',
+      '/exhib2/img6.jpg'
     ]
   },
   {
@@ -31,7 +32,9 @@ const exhibitions: Work[] = [
       '/exhib3/img1.jpg',
       '/exhib3/img2.png',
       '/exhib3/img3.jpg',
-      '/exhib3/img4.jpg'
+      '/exhib3/img4.jpg',
+      '/exhib2/img1.jpg',
+      '/exhib2/img2.jpg'
     ]
   },
   { name: 'Tempor Incididunt', id: 4, images: [] },
