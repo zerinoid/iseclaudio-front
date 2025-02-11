@@ -10,16 +10,21 @@ const WorkListing: FC<Props> = ({ works }) => {
   const { currentExhibition, setCurrentExhibition } = useWork()
   return (
     <ul>
-      {works.map(work => (
-        <li className="mb-9" key={work.id}>
-          <button
-            onClick={() => setCurrentExhibition(work)}
-            className="uppercase text-4xl hover:text-5xl decoration-double"
-          >
-            {work.images?.length > 0 ? work?.name : null}
-          </button>
-        </li>
-      ))}
+      {works.map(work => {
+        const activeWork = work?.name == currentExhibition?.name
+        return (
+          <li className="mb-9" key={work.id}>
+            <button
+              onClick={() => setCurrentExhibition(work)}
+              className={`uppercase text-4xl hover:text-5xl decoration-double ${
+                activeWork ? 'font-bold' : null
+              }`}
+            >
+              {work.images?.length > 0 ? work?.name : null}
+            </button>
+          </li>
+        )
+      })}
     </ul>
   )
 }
