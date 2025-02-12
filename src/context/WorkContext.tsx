@@ -11,11 +11,14 @@ import {
   useContext
 } from 'react'
 import exhibitionsData from '@/mocks/exhibitions'
+import projects from '@/mocks/projects'
 
 interface IWorkContext {
   exhibitions: Work[]
   currentExhibition: Work
   setCurrentExhibition: Dispatch<SetStateAction<Work>>
+  currentProject: Work
+  setCurrentProject: Dispatch<SetStateAction<Work>>
 }
 interface IWorkProvider {
   children: ReactNode
@@ -28,10 +31,17 @@ const WorkProvider: FC<IWorkProvider> = ({ children }) => {
   const [currentExhibition, setCurrentExhibition] = useState<Work>(
     exhibitionsData[0]
   )
+  const [currentProject, setCurrentProject] = useState<Work>(projects[0])
 
   return (
     <WorkContext.Provider
-      value={{ exhibitions, currentExhibition, setCurrentExhibition }}
+      value={{
+        exhibitions,
+        currentExhibition,
+        setCurrentExhibition,
+        currentProject,
+        setCurrentProject
+      }}
     >
       {children}
     </WorkContext.Provider>

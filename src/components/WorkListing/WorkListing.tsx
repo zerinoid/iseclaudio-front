@@ -18,7 +18,7 @@ const WorkListing: FC<Props> = ({ works }) => {
               onClick={() => setCurrentExhibition(work)}
               className={`uppercase text-4xl hover:text-5xl decoration-double ${
                 activeWork ? 'font-bold' : null
-              }`}
+              } text-left`}
             >
               {work.images?.length > 0 ? work?.name : null}
             </button>
