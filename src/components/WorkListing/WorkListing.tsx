@@ -2,20 +2,43 @@ import { useWork } from '@/context/WorkContext'
 import Work from '@/models/Work'
 import { FC } from 'react'
 
-type Props = {
-  works: Work[]
+export enum WorkTypes {
+  project = 'project',
+  exhibition = 'exhibition'
 }
 
-const WorkListing: FC<Props> = ({ works }) => {
-  const { currentExhibition, setCurrentExhibition } = useWork()
+type Props = {
+  works: Work[]
+  workType: WorkTypes
+}
+
+const WorkListing: FC<Props> = ({ works, workType }) => {
+  const {
+    currentExhibition,
+    setCurrentExhibition,
+    currentProject,
+    setCurrentProject
+  } = useWork()
+
+  const setWork = (work: Work, workType: WorkTypes) => {
+    if (workType === WorkTypes.project) {
+      setCurrentProject(work)
+    } else {
+      setCurrentExhibition(work)
+    }
+  }
+
   return (
     <ul>
       {works.map(work => {
-        const activeWork = work?.name == currentExhibition?.name
+        const activeWork =
+          work?.name == currentExhibition?.name ||
+          work?.name == currentProject?.name
+
         return (
           <li className="mb-9" key={work.id}>
             <button
-              onClick={() => setCurrentExhibition(work)}
+              onClick={() => setWork(work, workType)}
               className={`uppercase text-4xl hover:text-5xl decoration-double ${
                 activeWork ? 'font-bold' : null
               } text-left`}
