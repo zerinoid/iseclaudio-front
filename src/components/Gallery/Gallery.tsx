@@ -5,16 +5,17 @@ import styles from './Gallery.module.css'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import exhibitions from '@/mocks/exhibitions'
 import useScreenSize from '@/hooks/useScreenSize'
 import Breakpoints from '@/models/Breakpoints'
-import WorkListing from '../WorkListing/WorkListing'
-import { useWork } from '@/context/WorkContext'
+import Work from '@/models/Work'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
-export default function Gallery() {
-  const { currentExhibition } = useWork()
+type Props = {
+  currentWork: Work
+}
+
+export default function Gallery({ currentWork }: Props) {
   const container = useRef(null as unknown as HTMLDivElement)
   const footer = useRef(null as unknown as HTMLDivElement)
   const lastCard = useRef(null as unknown as HTMLDivElement)
@@ -23,8 +24,7 @@ export default function Gallery() {
   const [screenWidth] = useScreenSize()
   const isMd = screenWidth! > Breakpoints.md
 
-  const images = currentExhibition.images
-  console.log(images, '### images  ###')
+  const images = currentWork.images
 
   /* const { contextSafe } = useGSAP({ scope: container }); */
   useGSAP(
@@ -103,20 +103,6 @@ export default function Gallery() {
             </div>
           )
         })}
-
-        {screenWidth! <= Breakpoints.md ? (
-          <div
-            ref={el => {
-              pinnedRef.current[pinnedRef.current.length] = el as HTMLDivElement
-            }}
-            className={`${styles.card} ${styles.scroll} bg-background`}
-          >
-            <h1 className="font-bold text-5xl mb-12">EXHIBITIONS:</h1>
-            <div className="p-8">
-              <WorkListing works={exhibitions} />
-            </div>
-          </div>
-        ) : null}
         <div ref={footer} className={styles.footer}></div>
       </div>
     </section>

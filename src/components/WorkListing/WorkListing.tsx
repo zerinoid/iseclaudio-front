@@ -20,12 +20,13 @@ const WorkListing: FC<Props> = ({ works, workType }) => {
     setCurrentProject
   } = useWork()
 
+  const currentWork = {
+    exhibition: setCurrentExhibition,
+    project: setCurrentProject
+  }
+
   const setWork = (work: Work, workType: WorkTypes) => {
-    if (workType === WorkTypes.project) {
-      setCurrentProject(work)
-    } else {
-      setCurrentExhibition(work)
-    }
+    currentWork[workType](work)
   }
 
   return (
@@ -39,7 +40,7 @@ const WorkListing: FC<Props> = ({ works, workType }) => {
           <li className="mb-9" key={work.id}>
             <button
               onClick={() => setWork(work, workType)}
-              className={`uppercase text-4xl hover:text-5xl decoration-double ${
+              className={`uppercase text-4xl md:hover:text-5xl decoration-double ${
                 activeWork ? 'font-bold' : null
               } text-left`}
             >

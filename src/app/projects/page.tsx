@@ -1,21 +1,12 @@
 'use client'
-import Gallery from '@/components/Gallery/Gallery'
-import WorkListing, { WorkTypes } from '@/components/WorkListing/WorkListing'
-import projects from '@/mocks/projects'
+import GalleryWrapper from '@/components/GalleryWrapper/GalleryWrapper'
+import { WorkTypes } from '@/components/WorkListing/WorkListing'
 import { WorkProvider } from '@/context/WorkContext'
 
 export default function Projects() {
   return (
     <WorkProvider>
-      <div className="md:grid grid-cols-2 md:w-11/12">
-        <div className="hidden md:block relative">
-          <div className="sticky top-7">
-            <h1 className="font-bold text-5xl mb-12">PROJECTS:</h1>
-            <WorkListing works={projects} workType={WorkTypes.project} />
-          </div>
-        </div>
-        <Gallery />
-      </div>
+      <GalleryWrapper workType={WorkTypes.project} />
     </WorkProvider>
   )
 }
