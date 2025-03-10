@@ -78,7 +78,7 @@ const Contact: FC = () => {
             name="username"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-lg">Name</FormLabel>
+                <FormLabel>Name</FormLabel>
                 <FormControl>
                   <Input
                     className="border-primary"
@@ -112,7 +112,7 @@ const Contact: FC = () => {
             name="message"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-lg">Message</FormLabel>
+                <FormLabel>Message</FormLabel>
                 <FormControl>
                   <Textarea
                     className="border-primary"
@@ -125,7 +125,7 @@ const Contact: FC = () => {
               </FormItem>
             )}
           />
-          <Button type="submit" className="text-md">
+          <Button type="submit" size="lg">
             {/*<PaperPlane />*/}
             Send{' '}
           </Button>
