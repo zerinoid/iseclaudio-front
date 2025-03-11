@@ -19,10 +19,10 @@ import { Textarea } from '@/components/ui/textarea'
 /* import { toast } from 'sonner' */
 
 const FormSchema = z.object({
-  username: z.string().min(2, {
+  user_name: z.string().min(2, {
     message: 'Nome deve ter pelo menos 2 caracteres'
   }),
-  email: z.string().email('Invalid email address.').min(2, {
+  user_email: z.string().email('Invalid email address.').min(2, {
     message: 'Email deve ter pelo menos 2 caracteres'
   }),
   message: z.string().min(10, {
@@ -38,8 +38,8 @@ const Contact: FC = () => {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      username: '',
-      email: '',
+      user_name: '',
+      user_email: '',
       message: ''
     }
   })
@@ -75,7 +75,7 @@ const Contact: FC = () => {
           className="w-full md:w-2/4 space-y-6"
         >
           <FormField
-            name="username"
+            name="user_name"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Name</FormLabel>
@@ -92,7 +92,7 @@ const Contact: FC = () => {
           />
           <FormField
             control={form.control}
-            name="email"
+            name="user_email"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Email</FormLabel>
