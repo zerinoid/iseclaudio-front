@@ -2,8 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { FC, useEffect, useRef, useState } from 'react'
-import { z } from 'zod'
+import { FC, useRef, useState } from 'react'
 import emailjs from '@emailjs/browser'
 import { Button } from '@/components/ui/button'
 import {
@@ -17,83 +16,44 @@ import {
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { toast } from 'sonner'
+import { formSchema, FormData } from './formSchema'
 
-const FormSchema = z.object({
-  user_name: z.string().min(2, {
-    message: 'Nome deve ter pelo menos 2 caracteres'
-  }),
-  user_email: z.string().email('Invalid email address.').min(2, {
-    message: 'Email deve ter pelo menos 2 caracteres'
-  }),
-  message: z.string().min(10, {
-    message: 'Mensagem deve ter pelo menos 10 caracteres'
-  })
-})
 const Contact: FC = () => {
-  const [contactNumber, setContactNumber] = useState<number>(0)
+  const [isSubmitting, setIsSubmitting] = useState(false)
   // EmailJS needs the `ref` parameter in a form, ShadCN doesn't use
   // this by default so we have to import it.
   const formRef = useRef<HTMLFormElement | null>(null)
 
-  useEffect(() => {
-    getContactNumber()
-  }, [])
-
-  const getContactNumber = async () => {
-    try {
-      const response = await fetch('/api', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-
-      const result = await response.json()
-      setContactNumber(result.contactNumber)
-    } catch (error) {
-      toast.error('Ocorrreu um erro, tente novamente')
-      console.warn('FAILED...', JSON.stringify(error))
-    }
-  }
-
-  const writeContactNumber = async () => {
-    try {
-      // Call the API route to get the unique contact number
-      const response = await fetch('/api', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        }
-        /* body: JSON.stringify(formData), */
-      })
-
-      const result = await response.json()
-
-      // Set the unique contact number
-      setContactNumber(result.contactNumber)
-      return result
-    } catch (error) {
-      toast.error('Ocorrreu um erro, tente novamente')
-      console.warn('FAILED...', JSON.stringify(error))
-    }
-  }
-
   // configure Zod default values for the form
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
+  const form = useForm<FormData>({
+    resolver: zodResolver(formSchema),
     defaultValues: {
       user_name: '',
       user_email: '',
-      message: ''
+      message: '',
+      contact_number: ''
     }
   })
 
   // Create the handler that connects to EmailJS.
-  const onSubmit = async (data: z.infer<typeof FormSchema>) => {
+  const onSubmit = async (data: FormData) => {
+    setIsSubmitting(true)
+
     try {
-      /* await getContactNumber() */
-      const result = await writeContactNumber()
-      // Submit the form (or send it via EmailJS)
+      // Fetch the unique contact number
+      const response = await fetch('/api', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+
+      const result = await response.json()
+
+      // Update the form data with the new contact number
+      form.setValue('contact_number', result.contactNumber.toString())
+
       if (formRef.current) {
         emailjs.sendForm(
           process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID as string,
@@ -108,11 +68,13 @@ const Contact: FC = () => {
         toast.success(
           `Seu contato nº #${result.contactNumber} foi registrado com sucesso. Verifique seu email.`
         )
-        /* form.reset() */
+        form.reset()
       }
     } catch (error) {
       toast.error('Ocorrreu um erro, tente novamente')
       console.warn('FAILED...', JSON.stringify(error))
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
@@ -175,23 +137,9 @@ const Contact: FC = () => {
               </FormItem>
             )}
           />
-          <FormField
-            name="contact_number"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Input
-                    type="hidden"
-                    {...field}
-                    value={String(contactNumber + 1)}
-                  />
-                </FormControl>
-              </FormItem>
-            )}
-          />
-          <Button type="submit" size="lg">
-            {/*<PaperPlane />*/}
-            Send{' '}
+          <input type="hidden" {...form.register('contact_number')} />
+          <Button type="submit" size="lg" disabled={isSubmitting}>
+            {isSubmitting ? 'Sending...' : 'Send'}
           </Button>
         </form>
       </Form>
