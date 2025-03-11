@@ -68,6 +68,7 @@ const Contact: FC = () => {
         )
     }
   }
+
   return (
     <section className="flex justify-center">
       <Form {...form}>
@@ -88,7 +89,7 @@ const Contact: FC = () => {
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className="text-xs text-red-600" />
+                <FormMessage className="text-2xl text-red-600" />
               </FormItem>
             )}
           />
@@ -105,7 +106,7 @@ const Contact: FC = () => {
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className="text-xs text-red-600" />
+                <FormMessage className="text-2xl text-red-600" />
               </FormItem>
             )}
           />
@@ -123,7 +124,7 @@ const Contact: FC = () => {
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className="text-xs text-red-600" />
+                <FormMessage className="text-2xl text-red-600" />
               </FormItem>
             )}
           />
