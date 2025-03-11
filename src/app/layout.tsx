@@ -3,6 +3,7 @@ import localFont from 'next/font/local'
 import './globals.css'
 import Header from '@/components/Header/Header'
 import Footer from '@/components/Footer/Footer'
+import { Toaster } from 'sonner'
 
 const instrumentSerif = localFont({
   src: './fonts/InstrumentSerif-Regular.woff2',
@@ -16,7 +17,7 @@ const instrumentSerif = localFont({
  *  */
 export const metadata: Metadata = {
   title: 'Ise Claudio',
-  description: 'Generado por'
+  description: 'ise'
 }
 
 export default function RootLayout({
@@ -30,6 +31,7 @@ export default function RootLayout({
         <Header />
         <main className="container pt-5 flex-auto">{children}</main>
         <Footer />
+        <Toaster />
       </body>
     </html>
   )

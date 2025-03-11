@@ -16,7 +16,7 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
-/* import { toast } from 'sonner' */
+import { toast } from 'sonner'
 
 const FormSchema = z.object({
   user_name: z.string().min(2, {
@@ -58,9 +58,11 @@ const Contact: FC = () => {
         )
         .then(
           () => {
-            form.reset() //clear the fields after submission
+            toast.success('Email enviado')
+            form.reset()
           },
           error => {
+            toast.error('Ocorrreu um erro, tente novamente')
             console.warn('FAILED...', JSON.stringify(error))
           }
         )
