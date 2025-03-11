@@ -2,7 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { FC, useRef } from 'react'
+import { FC, useEffect, useRef, useState } from 'react'
 import { z } from 'zod'
 import emailjs from '@emailjs/browser'
 import { Button } from '@/components/ui/button'
@@ -30,9 +30,53 @@ const FormSchema = z.object({
   })
 })
 const Contact: FC = () => {
+  const [contactNumber, setContactNumber] = useState<number>(0)
   // EmailJS needs the `ref` parameter in a form, ShadCN doesn't use
   // this by default so we have to import it.
   const formRef = useRef<HTMLFormElement | null>(null)
+
+  useEffect(() => {
+    getContactNumber()
+  }, [])
+
+  const getContactNumber = async () => {
+    try {
+      const response = await fetch('/api', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+
+      const result = await response.json()
+      setContactNumber(result.contactNumber)
+    } catch (error) {
+      toast.error('Ocorrreu um erro, tente novamente')
+      console.warn('FAILED...', JSON.stringify(error))
+    }
+  }
+
+  const writeContactNumber = async () => {
+    try {
+      // Call the API route to get the unique contact number
+      const response = await fetch('/api', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+        /* body: JSON.stringify(formData), */
+      })
+
+      const result = await response.json()
+
+      // Set the unique contact number
+      setContactNumber(result.contactNumber)
+      return result
+    } catch (error) {
+      toast.error('Ocorrreu um erro, tente novamente')
+      console.warn('FAILED...', JSON.stringify(error))
+    }
+  }
 
   // configure Zod default values for the form
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -45,10 +89,13 @@ const Contact: FC = () => {
   })
 
   // Create the handler that connects to EmailJS.
-  const onSubmit = (data: z.infer<typeof FormSchema>) => {
-    if (formRef.current) {
-      emailjs
-        .sendForm(
+  const onSubmit = async (data: z.infer<typeof FormSchema>) => {
+    try {
+      /* await getContactNumber() */
+      const result = await writeContactNumber()
+      // Submit the form (or send it via EmailJS)
+      if (formRef.current) {
+        emailjs.sendForm(
           process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID as string,
           process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID as string,
           formRef.current,
@@ -56,16 +103,16 @@ const Contact: FC = () => {
             publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY as string
           }
         )
-        .then(
-          () => {
-            toast.success('Email enviado')
-            form.reset()
-          },
-          error => {
-            toast.error('Ocorrreu um erro, tente novamente')
-            console.warn('FAILED...', JSON.stringify(error))
-          }
+
+        console.log('Form submitted with contact number:', result.contactNumber)
+        toast.success(
+          `Seu contato nº #${result.contactNumber} foi registrado com sucesso. Verifique seu email.`
         )
+        /* form.reset() */
+      }
+    } catch (error) {
+      toast.error('Ocorrreu um erro, tente novamente')
+      console.warn('FAILED...', JSON.stringify(error))
     }
   }
 
@@ -125,6 +172,20 @@ const Contact: FC = () => {
                   />
                 </FormControl>
                 <FormMessage className="text-2xl text-red-600" />
+              </FormItem>
+            )}
+          />
+          <FormField
+            name="contact_number"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Input
+                    type="hidden"
+                    {...field}
+                    value={String(contactNumber + 1)}
+                  />
+                </FormControl>
               </FormItem>
             )}
           />
