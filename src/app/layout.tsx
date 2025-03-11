@@ -31,7 +31,10 @@ export default function RootLayout({
         <Header />
         <main className="container pt-5 flex-auto">{children}</main>
         <Footer />
-        <Toaster />
+        <Toaster
+          mobileOffset={{ bottom: '16px' }}
+          offset={{ bottom: '30px', right: '30px', left: '16px' }}
+        />
       </body>
     </html>
   )
