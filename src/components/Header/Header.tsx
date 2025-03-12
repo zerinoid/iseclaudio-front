@@ -73,21 +73,21 @@ const Header = () => {
               PROJECTS
             </Link>
           </li>
-          <li className={styles.navItem}>
-            <Link onClick={closeMenu} href="/subscribe">
+          {/* <li className={styles.navItem}>
+              <Link onClick={closeMenu} href="/subscribe">
               SUBSCRIBE
-            </Link>
-          </li>
+              </Link>
+              </li> */}
           <li className={styles.navItem}>
             <Link onClick={closeMenu} href="/contact">
               CONTACT
             </Link>
           </li>
-          <li className={styles.navItem}>
-            <Link onClick={closeMenu} href="shop">
+          {/* <li className={styles.navItem}>
+              <Link onClick={closeMenu} href="shop">
               SHOP
-            </Link>
-          </li>
+              </Link>
+              </li> */}
           <li>
             <a
               onClick={closeMenu}
