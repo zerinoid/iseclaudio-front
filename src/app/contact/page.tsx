@@ -64,14 +64,14 @@ const Contact: FC = () => {
           }
         )
 
-        console.log('Form submitted with contact number:', result.contactNumber)
+        /* console.log('Form submitted with contact number:', result.contactNumber) */
         toast.success(
           `Seu contato nº #${result.contactNumber} foi registrado com sucesso. Verifique seu email.`
         )
         form.reset()
       }
     } catch (error) {
-      toast.error('Ocorrreu um erro, tente novamente')
+      toast.error('Ocorreu um erro, tente novamente')
       console.warn('FAILED...', JSON.stringify(error))
     } finally {
       setIsSubmitting(false)
