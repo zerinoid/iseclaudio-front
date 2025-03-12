@@ -33,11 +33,14 @@ const exhibitions: Work[] = [
       '/exhib3/img2.png',
       '/exhib3/img3.jpg',
       '/exhib3/img4.jpg',
-      '/exhib2/img1.jpg',
-      '/exhib2/img2.jpg'
+      '/exhib2/img1.jpg'
     ]
   },
-  { name: 'Tempor Incididunt', id: 4, images: [] },
+  {
+    name: 'Tempor Incididunt',
+    id: 4,
+    images: ['/exhib3/img2.png', '/exhib1/img4.jpg']
+  },
   { name: 'Ut Labore', id: 5, images: [] }
 ]
 

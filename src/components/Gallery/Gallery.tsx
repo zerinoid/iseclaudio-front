@@ -1,5 +1,5 @@
 'use client'
-import { useRef } from 'react'
+import { useRef, useEffect } from 'react'
 import Image from 'next/image'
 import styles from './Gallery.module.css'
 import gsap from 'gsap'
@@ -9,79 +9,89 @@ import useScreenSize from '@/hooks/useScreenSize'
 import Breakpoints from '@/models/Breakpoints'
 import Work from '@/models/Work'
 
-gsap.registerPlugin(useGSAP, ScrollTrigger)
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger, useGSAP)
+}
 
 type Props = {
   currentWork: Work
 }
 
 export default function Gallery({ currentWork }: Props) {
-  const container = useRef(null as unknown as HTMLDivElement)
-  const footer = useRef(null as unknown as HTMLDivElement)
-  const lastCard = useRef(null as unknown as HTMLDivElement)
-  const pinnedRef = useRef([] as HTMLDivElement[])
+  const container = useRef<HTMLDivElement>(null)
+  const footer = useRef<HTMLDivElement>(null)
+  const lastCard = useRef<HTMLDivElement>(null)
+  const pinnedRef = useRef<HTMLDivElement[]>([])
 
   const [screenWidth] = useScreenSize()
   const isMd = screenWidth! > Breakpoints.md
-
   const images = currentWork.images
 
-  /* const { contextSafe } = useGSAP({ scope: container }); */
+  // Clean up ScrollTriggers when the component updates or unmounts
+  useEffect(() => {
+    const triggers = ScrollTrigger.getAll() // Store existing ScrollTriggers
+    return () => {
+      triggers.forEach(trigger => trigger.kill()) // Kill all ScrollTriggers
+    }
+  }, [currentWork]) // Re-run cleanup when currentExhibition changes
+
   useGSAP(
     () => {
       const pinnedSections: HTMLDivElement[] = gsap.utils.toArray(
         pinnedRef.current
       )
 
-      pinnedSections.forEach(
-        (
-          section: HTMLDivElement,
-          index: number,
-          sections: HTMLDivElement[]
-        ) => {
-          const img = section.children[0]
+      pinnedSections.forEach((section: HTMLDivElement, index: number) => {
+        if (!section || !section.children[0]) return // Ensure the section and its child exist
 
-          const nextSection: HTMLElement = sections[index + 1] || lastCard
-          const endScalePoint = `top+=${
-            nextSection?.offsetTop - section.offsetTop
-          } top`
+        const img = section.children[0]
+        const nextSection: HTMLElement =
+          pinnedSections[index + 1] || lastCard.current!
 
-          gsap.to(section, {
+        // Ensure nextSection and footer exist before accessing their properties
+        if (!nextSection || !footer.current) return
+
+        const endScalePoint = `top+=${
+          nextSection.offsetTop - section.offsetTop
+        } top`
+
+        gsap.to(section, {
+          scrollTrigger: {
+            trigger: section,
+            start: 'top top',
+            end:
+              index === pinnedSections.length - 1
+                ? `+=${lastCard.current?.offsetHeight ?? 0 / 2}` // Check if lastCard exists
+                : footer.current.offsetTop - window.innerHeight,
+            pin: true,
+            pinSpacing: false,
+            scrub: 1,
+            invalidateOnRefresh: true // Add this line
+          }
+        })
+
+        gsap.fromTo(
+          img,
+          { scale: 1 },
+          {
+            scale: 0.5,
+            ease: 'none',
             scrollTrigger: {
               trigger: section,
               start: 'top top',
-              end:
-                index === sections.length
-                  ? `+=${lastCard.current.offsetHeight / 2}`
-                  : footer.current.offsetTop - window.innerHeight,
-              pin: true,
-              pinSpacing: false,
-              scrub: 1
+              end: endScalePoint,
+              scrub: 1,
+              invalidateOnRefresh: true // Add this line
             }
-          })
-
-          gsap.fromTo(
-            img,
-            { scale: 1 },
-            {
-              scale: 0.5,
-              ease: 'none',
-              scrollTrigger: {
-                trigger: section,
-                start: 'top top',
-                end: endScalePoint,
-                scrub: 1
-              }
-            }
-          )
-        }
-      )
+          }
+        )
+      })
     },
-    { scope: container }
+    { scope: container, dependencies: [currentWork] } // Re-run animations when currentExhibition changes
   )
 
   return (
-    <section>
+    <section key={currentWork.id}>
       <div ref={container}>
         {images?.map((pic, idx, arr) => {
           const className = !isMd
@@ -93,7 +103,7 @@ export default function Gallery({ currentWork }: Props) {
             <div
               key={idx}
               ref={el => {
-                pinnedRef.current[idx] = el as HTMLDivElement
+                if (el) pinnedRef.current[idx] = el
               }}
               className={`${styles.card} ${className}`}
             >
