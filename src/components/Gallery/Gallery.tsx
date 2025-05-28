@@ -1,5 +1,5 @@
 'use client'
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import Image from 'next/image'
 import styles from './Gallery.module.css'
 import gsap from 'gsap'
@@ -22,6 +22,7 @@ export default function Gallery({ currentWork }: Props) {
   const footer = useRef<HTMLDivElement>(null)
   const lastCard = useRef<HTMLDivElement>(null)
   const pinnedRef = useRef<HTMLDivElement[]>([])
+  const [isInitialLoad, setIsInitialLoad] = useState(true)
 
   const [screenWidth] = useScreenSize()
   const isMd = screenWidth! > Breakpoints.md
@@ -29,7 +30,11 @@ export default function Gallery({ currentWork }: Props) {
 
   // Clean up ScrollTriggers when the component updates or unmounts
   useEffect(() => {
-    pinnedRef.current = [] // Reset pinnedRef
+    if (isInitialLoad) {
+      setIsInitialLoad(false)
+      return
+    }
+
     const triggers = ScrollTrigger.getAll() // Store existing ScrollTriggers
     return () => {
       triggers.forEach(trigger => trigger.kill()) // Kill all ScrollTriggers
@@ -38,9 +43,15 @@ export default function Gallery({ currentWork }: Props) {
 
   useGSAP(
     () => {
+      // Only reset pinnedRef after initial load
+      if (!isInitialLoad) {
+        pinnedRef.current = []
+      }
+
       const pinnedSections: HTMLDivElement[] = gsap.utils.toArray(
         pinnedRef.current
       )
+      console.log(pinnedSections, '### pinnedSections  ###')
 
       pinnedSections.forEach((section: HTMLDivElement, index: number) => {
         if (!section || !section.children[0]) return // Ensure the section and its child exist
@@ -61,10 +72,7 @@ export default function Gallery({ currentWork }: Props) {
             scrollTrigger: {
               trigger: section,
               start: 'top top',
-              end:
-                index === pinnedSections.length - 1
-                  ? `+=${lastCard.current?.offsetHeight ?? 0 / 2}` // Check if lastCard exists
-                  : footer.current.offsetTop - window.innerHeight,
+              end: footer.current.offsetTop - window.innerHeight,
               pin: true,
               pinSpacing: false,
               scrub: 1,
