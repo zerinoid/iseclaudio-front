@@ -5,10 +5,12 @@ import styles from './Gallery.module.css'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
+
 import Work from '@/models/Work'
 
 if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger, useGSAP)
+  gsap.registerPlugin(ScrollTrigger, useGSAP, ScrollToPlugin)
 }
 
 type Props = {
@@ -25,6 +27,17 @@ export default function Gallery({ currentWork }: Props) {
 
   // Clean up ScrollTriggers when the component updates or unmounts
   useEffect(() => {
+    // Smooth scroll to top using GSAP
+    gsap.to(window, {
+      scrollTo: {
+        y: 0,
+        autoKill: false
+      },
+      duration: 1.5,
+      ease: 'power2.inOut',
+      overwrite: 'auto'
+    })
+
     const triggers = ScrollTrigger.getAll() // Store existing ScrollTriggers
     return () => {
       triggers.forEach(trigger => trigger.kill()) // Kill all ScrollTriggers
