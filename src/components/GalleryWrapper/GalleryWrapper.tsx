@@ -30,7 +30,7 @@ const GalleryWrapper: FC<Props> = ({ workType }) => {
     <div className="grid grid-cols-1 md:grid-cols-2 md:w-11/12">
       <Gallery currentWork={currentWork[workType].currentData} />
       <div className="md:order-first relative">
-        <div className="sticky top-7">
+        <div className="sticky top-7 mt-6 md:mt-0">
           <h1 className="font-bold text-5xl mb-12">
             {currentWork[workType].title}
           </h1>
