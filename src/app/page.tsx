@@ -1,4 +1,4 @@
-import Showcase from '@/components/showcase/Showcase'
+import Showcase from '@/components/Showcase/Showcase'
 
 export default function Home() {
   return <Showcase />
