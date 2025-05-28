@@ -29,6 +29,7 @@ export default function Gallery({ currentWork }: Props) {
 
   // Clean up ScrollTriggers when the component updates or unmounts
   useEffect(() => {
+    pinnedRef.current = [] // Reset pinnedRef
     const triggers = ScrollTrigger.getAll() // Store existing ScrollTriggers
     return () => {
       triggers.forEach(trigger => trigger.kill()) // Kill all ScrollTriggers
@@ -51,40 +52,42 @@ export default function Gallery({ currentWork }: Props) {
         // Ensure nextSection and footer exist before accessing their properties
         if (!nextSection || !footer.current) return
 
-        const endScalePoint = `top+=${
-          nextSection.offsetTop - section.offsetTop
-        } top`
+        if (index < pinnedSections.length - 1) {
+          const endScalePoint = `top+=${
+            nextSection.offsetTop - section.offsetTop
+          } top`
 
-        gsap.to(section, {
-          scrollTrigger: {
-            trigger: section,
-            start: 'top top',
-            end:
-              index === pinnedSections.length - 1
-                ? `+=${lastCard.current?.offsetHeight ?? 0 / 2}` // Check if lastCard exists
-                : footer.current.offsetTop - window.innerHeight,
-            pin: true,
-            pinSpacing: false,
-            scrub: 1,
-            invalidateOnRefresh: true // Add this line
-          }
-        })
-
-        gsap.fromTo(
-          img,
-          { scale: 1 },
-          {
-            scale: 0.5,
-            ease: 'none',
+          gsap.to(section, {
             scrollTrigger: {
               trigger: section,
               start: 'top top',
-              end: endScalePoint,
+              end:
+                index === pinnedSections.length - 1
+                  ? `+=${lastCard.current?.offsetHeight ?? 0 / 2}` // Check if lastCard exists
+                  : footer.current.offsetTop - window.innerHeight,
+              pin: true,
+              pinSpacing: false,
               scrub: 1,
               invalidateOnRefresh: true // Add this line
             }
-          }
-        )
+          })
+
+          gsap.fromTo(
+            img,
+            { scale: 1 },
+            {
+              scale: 0.5,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: section,
+                start: 'top top',
+                end: endScalePoint,
+                scrub: 1,
+                invalidateOnRefresh: true // Add this line
+              }
+            }
+          )
+        }
       })
     },
     { scope: container, dependencies: [currentWork] } // Re-run animations when currentExhibition changes
@@ -94,11 +97,8 @@ export default function Gallery({ currentWork }: Props) {
     <section key={currentWork.id}>
       <div ref={container}>
         {images?.map((pic, idx, arr) => {
-          const className = !isMd
-            ? styles.pinned
-            : idx === arr.length - 1
-            ? styles.scroll
-            : styles.pinned
+          const className =
+            idx === arr.length - 1 ? styles.scroll : styles.pinned
           return (
             <div
               key={idx}
