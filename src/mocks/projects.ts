@@ -3,6 +3,7 @@ import Work from '@/models/Work'
 const projects: Work[] = [
   {
     name: 'Nulla facilisis, risus a rhoncus fermentum, tellus tellus lacinia purus, et dictum nunc justo sit amet elit',
+    caption: 'Nullam tristique diam non turpis.',
     id: 1,
     images: [
       '/exhib2/img6.jpg',
@@ -15,6 +16,7 @@ const projects: Work[] = [
   },
   {
     name: 'Phasellus neque orci, porta a, semper a, massa',
+    caption: 'Nullam tristique diam non turpis.',
     id: 2,
     images: [
       '/exhib3/img3.jpg',
@@ -27,6 +29,7 @@ const projects: Work[] = [
   },
   {
     name: 'Nunc rutrum turpis sed pede',
+    caption: 'Nullam tristique diam non turpis.',
     id: 3,
     images: [
       '/exhib1/img5.jpg',
@@ -37,8 +40,8 @@ const projects: Work[] = [
       '/exhib1/img6.jpg'
     ]
   },
-  { name: 'Nunc eleifend leo vitae magna', id: 4, images: [] },
-  { name: 'Nunc rutrum turpis sed pede', id: 5, images: [] }
+  { name: 'Nunc eleifend leo vitae magna', caption: '', id: 4, images: [] },
+  { name: 'Nunc rutrum turpis sed pede', caption: '', id: 5, images: [] }
 ]
 
 export default projects
