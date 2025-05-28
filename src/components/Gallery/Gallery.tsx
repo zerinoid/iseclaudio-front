@@ -1,5 +1,5 @@
 'use client'
-import { useRef, useEffect, useState } from 'react'
+import { useRef, useEffect } from 'react'
 import Image from 'next/image'
 import styles from './Gallery.module.css'
 import gsap from 'gsap'
@@ -22,7 +22,6 @@ export default function Gallery({ currentWork }: Props) {
   const footer = useRef<HTMLDivElement>(null)
   const lastCard = useRef<HTMLDivElement>(null)
   const pinnedRef = useRef<HTMLDivElement[]>([])
-  const [isInitialLoad, setIsInitialLoad] = useState(true)
 
   const [screenWidth] = useScreenSize()
   const isMd = screenWidth! > Breakpoints.md
@@ -30,26 +29,17 @@ export default function Gallery({ currentWork }: Props) {
 
   // Clean up ScrollTriggers when the component updates or unmounts
   useEffect(() => {
-    if (isInitialLoad) {
-      setIsInitialLoad(false)
-      return
-    }
-
     const triggers = ScrollTrigger.getAll() // Store existing ScrollTriggers
     return () => {
       triggers.forEach(trigger => trigger.kill()) // Kill all ScrollTriggers
+      pinnedRef.current = pinnedRef.current.slice(0, images?.length || 0)
     }
   }, [currentWork]) // Re-run cleanup when currentExhibition changes
 
   useGSAP(
     () => {
-      // Only reset pinnedRef after initial load
-      if (!isInitialLoad) {
-        pinnedRef.current = []
-      }
-
       const pinnedSections: HTMLDivElement[] = gsap.utils.toArray(
-        pinnedRef.current
+        pinnedRef.current.filter(Boolean)
       )
       console.log(pinnedSections, '### pinnedSections  ###')
 
@@ -111,7 +101,12 @@ export default function Gallery({ currentWork }: Props) {
             <div
               key={idx}
               ref={el => {
-                if (el) pinnedRef.current[idx] = el
+                if (el) {
+                  pinnedRef.current[idx] = el
+                } else if (pinnedRef.current[idx]) {
+                  // Clean up ref if element is unmounted
+                  pinnedRef.current[idx] = null!
+                }
               }}
               className={`${styles.card} ${className}`}
             >
