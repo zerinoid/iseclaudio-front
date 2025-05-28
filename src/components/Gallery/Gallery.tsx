@@ -5,8 +5,6 @@ import styles from './Gallery.module.css'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import useScreenSize from '@/hooks/useScreenSize'
-import Breakpoints from '@/models/Breakpoints'
 import Work from '@/models/Work'
 
 if (typeof window !== 'undefined') {
@@ -23,8 +21,6 @@ export default function Gallery({ currentWork }: Props) {
   const lastCard = useRef<HTMLDivElement>(null)
   const pinnedRef = useRef<HTMLDivElement[]>([])
 
-  const [screenWidth] = useScreenSize()
-  const isMd = screenWidth! > Breakpoints.md
   const images = currentWork.images
 
   // Clean up ScrollTriggers when the component updates or unmounts
@@ -32,6 +28,7 @@ export default function Gallery({ currentWork }: Props) {
     const triggers = ScrollTrigger.getAll() // Store existing ScrollTriggers
     return () => {
       triggers.forEach(trigger => trigger.kill()) // Kill all ScrollTriggers
+      // Only keep refs for current images
       pinnedRef.current = pinnedRef.current.slice(0, images?.length || 0)
     }
   }, [currentWork]) // Re-run cleanup when currentExhibition changes
@@ -41,7 +38,6 @@ export default function Gallery({ currentWork }: Props) {
       const pinnedSections: HTMLDivElement[] = gsap.utils.toArray(
         pinnedRef.current.filter(Boolean)
       )
-      console.log(pinnedSections, '### pinnedSections  ###')
 
       pinnedSections.forEach((section: HTMLDivElement, index: number) => {
         if (!section || !section.children[0]) return // Ensure the section and its child exist
