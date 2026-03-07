@@ -1,7 +1,7 @@
 export default function Bio() {
   return (
-    <>
-      <h1>Bio</h1>
+    <section className="pt-10">
+      <h1 className="text-5xl mb-8">Bio</h1>
       <p>
         Pellentesque dapibus suscipit ligula. Donec posuere augue in quam. Etiam
         vel tortor sodales tellus ultricies commodo. Suspendisse potenti. Aenean
@@ -15,6 +15,6 @@ export default function Bio() {
         facilisis, risus a rhoncus fermentum, tellus tellus lacinia purus, et
         dictum nunc justo sit amet elit.
       </p>
-    </>
+    </section>
   )
 }

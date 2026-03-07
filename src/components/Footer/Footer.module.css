@@ -11,12 +11,12 @@
 
 @media screen(md) {
   .footer {
-    height: 30vh;
+    height: 20vh;
     font-size: 2.4rem;
   }
 
 .footer p {
-  font-size: 48px;
+  font-size: 36px;
   font-weight: 400;
   letter-spacing: -2px;
 }

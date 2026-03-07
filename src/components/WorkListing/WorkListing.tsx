@@ -30,24 +30,26 @@ const WorkListing: FC<Props> = ({ works, workType }) => {
   }
 
   return (
-    <ul>
+    <ul className="mb-16">
       {works.map(work => {
         const activeWork =
           work?.name == currentExhibition?.name ||
           work?.name == currentProject?.name
 
-        return (
-          <li className="mb-9" key={work.id}>
-            <button
-              onClick={() => setWork(work, workType)}
-              className={`uppercase text-4xl md:hover:text-5xl decoration-double ${
-                activeWork ? 'font-bold' : null
-              } text-left`}
-            >
-              {work.images?.length > 0 ? work?.name : null}
-            </button>
-          </li>
-        )
+        if (work.images?.length > 0) {
+          return (
+            <li className="mb-9" key={work.id}>
+              <button
+                onClick={() => setWork(work, workType)}
+                className={`uppercase text-3xl md:hover:font-bold decoration-double ${
+                  activeWork ? 'text-5xl' : null
+                } text-left`}
+              >
+                {work?.name}
+              </button>
+            </li>
+          )
+        }
       })}
     </ul>
   )
