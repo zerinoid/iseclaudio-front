@@ -3,7 +3,7 @@ import Work from '@/models/Work'
 const exhibitions: Work[] = [
   {
     name: 'Lorem Ipsum Dolor Sit Amet',
-    caption: 'Nullam tristique diam non turpis.',
+    caption: 'Caption caption caption caption caption ',
     id: 1,
     images: [
       '/exhib1/img1.jpg',
@@ -16,7 +16,7 @@ const exhibitions: Work[] = [
   },
   {
     name: 'Consectetur Adipiscing Elit',
-    caption: 'Nullam tristique diam non turpis.',
+    caption: 'Caption caption caption caption caption ',
     id: 2,
     images: [
       '/exhib2/img1.jpg',
@@ -29,7 +29,7 @@ const exhibitions: Work[] = [
   },
   {
     name: 'Sed Do Eiusmod',
-    caption: 'Nullam tristique diam non turpis.',
+    caption: 'Caption caption caption caption caption ',
     id: 3,
     images: [
       '/exhib3/img1.jpg',

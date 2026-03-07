@@ -3,7 +3,7 @@ import Work from '@/models/Work'
 const projects: Work[] = [
   {
     name: 'Nulla facilisis, risus a rhoncus fermentum, tellus tellus lacinia purus, et dictum nunc justo sit amet elit',
-    caption: 'Nullam tristique diam non turpis.',
+    caption: 'Caption caption caption caption caption ',
     id: 1,
     images: [
       '/exhib2/img6.jpg',
@@ -16,7 +16,7 @@ const projects: Work[] = [
   },
   {
     name: 'Phasellus neque orci, porta a, semper a, massa',
-    caption: 'Nullam tristique diam non turpis.',
+    caption: 'Caption caption caption caption caption ',
     id: 2,
     images: [
       '/exhib3/img3.jpg',
@@ -29,7 +29,7 @@ const projects: Work[] = [
   },
   {
     name: 'Nunc rutrum turpis sed pede',
-    caption: 'Nullam tristique diam non turpis.',
+    caption: 'Caption caption caption caption caption ',
     id: 3,
     images: [
       '/exhib1/img5.jpg',
