@@ -2,46 +2,82 @@ import Work from '@/models/Work'
 
 const projects: Work[] = [
   {
-    name: 'Nulla facilisis, risus a rhoncus fermentum, tellus tellus lacinia purus, et dictum nunc justo sit amet elit',
+    name: 'Minwood',
     caption: 'Caption caption caption caption caption ',
     id: 1,
     images: [
-      '/exhib2/img6.jpg',
-      '/exhib2/img1.jpg',
-      '/exhib2/img2.jpg',
-      '/exhib2/img3.jpg',
-      '/exhib2/img4.png',
-      '/exhib2/img5.jpg'
+      '/proj1/img01.webp',
+      '/proj1/img02.webp',
+      '/proj1/img03.webp',
+      '/proj1/img04.webp',
+      '/proj1/img05.webp',
+      '/proj1/img06.webp'
     ]
   },
   {
-    name: 'Phasellus neque orci, porta a, semper a, massa',
+    name: 'Museu Ribeira',
     caption: 'Caption caption caption caption caption ',
     id: 2,
     images: [
-      '/exhib3/img3.jpg',
-      '/exhib3/img4.jpg',
-      '/exhib3/img1.jpg',
-      '/exhib3/img2.png',
-      '/exhib2/img1.jpg',
-      '/exhib2/img2.jpg'
+      '/proj2/img01.webp',
+      '/proj2/img02.webp',
+      '/proj2/img03.webp',
+      '/proj2/img04.webp',
+      '/proj2/img05.webp'
     ]
   },
   {
-    name: 'Nunc rutrum turpis sed pede',
+    name: 'João Pessoa',
     caption: 'Caption caption caption caption caption ',
     id: 3,
     images: [
-      '/exhib1/img5.jpg',
-      '/exhib1/img1.jpg',
-      '/exhib1/img2.jpg',
-      '/exhib1/img3.jpg',
-      '/exhib1/img4.jpg',
-      '/exhib1/img6.jpg'
+      '/proj3/img01.webp',
+      '/proj3/img02.webp',
+      '/proj3/img03.webp',
+      '/proj3/img04.webp'
     ]
   },
-  { name: 'Nunc eleifend leo vitae magna', caption: '', id: 4, images: [] },
-  { name: 'Nunc rutrum turpis sed pede', caption: '', id: 5, images: [] }
+  {
+    name: 'Fabrica de grafitti',
+    caption: ' ifiaiaiai FAOF oifa',
+    id: 4,
+    images: [
+      '/proj4/img01.webp',
+      '/proj4/img02.webp',
+      '/proj4/img03.webp',
+      '/proj4/img04.webp',
+      '/proj4/img05.webp',
+      '/proj4/img06.webp',
+      '/proj4/img06.webp',
+      '/proj3/img07.webp',
+      '/proj3/img08.webp',
+      '/proj3/img09.webp'
+    ]
+  },
+  {
+    name: 'Concreto',
+    caption: 'AOOA OAPAPA OA PAP',
+    id: 5,
+    images: [
+      '/proj5/img01.webp',
+      '/proj5/img02.webp',
+      '/proj5/img03.webp',
+      '/proj5/img04.webp',
+      '/proj5/img05.webp',
+      '/proj5/img06.webp'
+    ]
+  },
+  {
+    name: 'Basquiat',
+    caption: 'A E AE A E AE E E A EAEFaf',
+    id: 6,
+    images: [
+      '/proj6/img01.webp',
+      '/proj6/img02.webp',
+      '/proj6/img03.webp',
+      '/proj6/img04.webp'
+    ]
+  }
 ]
 
 export default projects

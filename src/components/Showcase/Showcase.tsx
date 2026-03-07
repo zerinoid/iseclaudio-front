@@ -15,12 +15,12 @@ if (typeof window !== 'undefined') {
 }
 
 const array = [
-  '/exhib1/img1.jpg',
-  '/exhib1/img2.jpg',
-  '/exhib1/img3.jpg',
-  '/exhib1/img4.jpg',
-  '/exhib1/img5.jpg',
-  '/exhib1/img6.jpg'
+  '/exhib1/img01.webp',
+  '/exhib2/img02.webp',
+  '/exhib3/img03.webp',
+  '/proj1/img04.webp',
+  '/proj2/img05.webp',
+  '/proj5/img06.webp'
 ]
 
 export default function Showcase() {

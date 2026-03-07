@@ -2,50 +2,63 @@ import Work from '@/models/Work'
 
 const exhibitions: Work[] = [
   {
-    name: 'Lorem Ipsum Dolor Sit Amet',
+    name: 'o que eu faço quando ninguém esta olhando',
     caption: 'Caption caption caption caption caption ',
     id: 1,
     images: [
-      '/exhib1/img1.jpg',
-      '/exhib1/img2.jpg',
-      '/exhib1/img3.jpg',
-      '/exhib1/img4.jpg',
-      '/exhib1/img5.jpg',
-      '/exhib1/img6.jpg'
+      '/exhib1/img01.webp',
+      '/exhib1/img02.webp',
+      '/exhib1/img03.webp',
+      '/exhib1/img04.webp',
+      '/exhib1/img05.webp',
+      '/exhib1/img06.webp',
+      '/exhib1/img07.webp',
+      '/exhib1/img08.webp',
+      '/exhib1/img09.webp',
+      '/exhib1/img10.webp',
+      '/exhib1/img11.webp',
+      '/exhib1/img12.webp',
+      '/exhib1/img13.webp',
+      '/exhib1/img14.webp',
+      '/exhib1/img15.webp',
+      '/exhib1/img16.webp',
+      '/exhib1/img17.webp',
+      '/exhib1/img18.webp',
+      '/exhib1/img19.webp',
+      '/exhib1/img20.webp',
+      '/exhib1/img21.webp'
     ]
   },
   {
-    name: 'Consectetur Adipiscing Elit',
+    name: 'Corpo Humano',
     caption: 'Caption caption caption caption caption ',
     id: 2,
     images: [
-      '/exhib2/img1.jpg',
-      '/exhib2/img2.jpg',
-      '/exhib2/img3.jpg',
-      '/exhib2/img4.png',
-      '/exhib2/img5.jpg',
-      '/exhib2/img6.jpg'
+      '/exhib2/img01.webp',
+      '/exhib2/img02.webp',
+      '/exhib2/img03.webp',
+      '/exhib2/img04.webp',
+      '/exhib2/img05.webp',
+      '/exhib2/img06.webp',
+      '/exhib2/img07.webp',
+      '/exhib2/img08.webp'
     ]
   },
   {
-    name: 'Sed Do Eiusmod',
+    name: 'Cartel011',
     caption: 'Caption caption caption caption caption ',
     id: 3,
     images: [
-      '/exhib3/img1.jpg',
-      '/exhib3/img2.png',
-      '/exhib3/img3.jpg',
-      '/exhib3/img4.jpg',
-      '/exhib2/img1.jpg'
+      '/exhib3/img01.webp',
+      '/exhib3/img02.webp',
+      '/exhib3/img03.webp',
+      '/exhib3/img04.webp',
+      '/exhib3/img05.webp',
+      '/exhib3/img06.webp',
+      '/exhib3/img07.webp',
+      '/exhib3/img08.webp'
     ]
-  },
-  {
-    name: 'Tempor Incididunt',
-    caption: 'Nullam tristique diam non turpis.',
-    id: 4,
-    images: ['/exhib3/img2.png', '/exhib1/img4.jpg']
-  },
-  { name: 'Ut Labore', caption: '', id: 5, images: [] }
+  }
 ]
 
 export default exhibitions
