@@ -1,52 +1,86 @@
 'use client'
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import Image from 'next/image'
 import styles from './Showcase.module.css'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
 import Link from 'next/link'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
-export default function Showcase() {
-  const container = useRef(null as unknown as HTMLDivElement)
-  const footer = useRef(null as unknown as HTMLDivElement)
-  const lastCard = useRef(null as unknown as HTMLDivElement)
-  const heroRef = useRef(null as unknown as HTMLDivElement)
-  const pinnedRef = useRef([] as HTMLDivElement[])
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger, useGSAP, ScrollToPlugin)
+}
 
-  /* const { contextSafe } = useGSAP({ scope: container }); */
+const array = [
+  '/exhib1/img1.jpg',
+  '/exhib1/img2.jpg',
+  '/exhib1/img3.jpg',
+  '/exhib1/img4.jpg',
+  '/exhib1/img5.jpg',
+  '/exhib1/img6.jpg'
+]
+
+export default function Showcase() {
+  const container = useRef<HTMLDivElement>(null)
+  const footer = useRef<HTMLDivElement>(null)
+  const lastCard = useRef<HTMLDivElement>(null)
+  const heroRef = useRef<HTMLDivElement>(null)
+  const pinnedRef = useRef<HTMLDivElement[]>([])
+
+  // Clean up ScrollTriggers when the component updates or unmounts
+  useEffect(() => {
+    // Smooth scroll to top using GSAP
+    gsap.to(window, {
+      scrollTo: {
+        y: 0,
+        autoKill: false
+      },
+      duration: 1.5,
+      ease: 'power2.inOut',
+      overwrite: 'auto'
+    })
+
+    const triggers = ScrollTrigger.getAll() // Store existing ScrollTriggers
+    return () => {
+      triggers.forEach(trigger => trigger.kill()) // Kill all ScrollTriggers
+      // Only keep refs for current images
+      pinnedRef.current = pinnedRef.current.slice(0, array?.length || 0)
+    }
+  }, []) // Re-run cleanup when currentExhibition changes
+
   useGSAP(
     () => {
       const pinnedSections: HTMLDivElement[] = gsap.utils.toArray(
-        pinnedRef.current
+        pinnedRef.current.filter(Boolean)
       )
 
-      pinnedSections.forEach(
-        (
-          section: HTMLDivElement,
-          index: number,
-          sections: HTMLDivElement[]
-        ) => {
-          const img = section.children[0]
+      pinnedSections.forEach((section: HTMLDivElement, index: number) => {
+        if (!section || !section.children[0]) return // Ensure the section and its child exist
 
-          const nextSection: HTMLElement = sections[index + 1] || lastCard
+        const img = section.children[0]
+        const nextSection: HTMLElement =
+          pinnedSections[index + 1] || lastCard.current!
+
+        // Ensure nextSection and footer exist before accessing their properties
+        if (!nextSection || !footer.current) return
+
+        if (index < pinnedSections.length - 1) {
           const endScalePoint = `top+=${
-            nextSection?.offsetTop - section.offsetTop
+            nextSection.offsetTop - section.offsetTop
           } top`
 
           gsap.to(section, {
             scrollTrigger: {
               trigger: section,
               start: 'top top',
-              end:
-                index === sections.length
-                  ? `+=${lastCard.current.offsetHeight / 2}`
-                  : footer.current.offsetTop - window.innerHeight,
+              end: footer.current.offsetTop - window.innerHeight,
               pin: true,
               pinSpacing: false,
-              scrub: 1
+              scrub: 1,
+              invalidateOnRefresh: true // Add this line
             }
           })
 
@@ -60,35 +94,16 @@ export default function Showcase() {
                 trigger: section,
                 start: 'top top',
                 end: endScalePoint,
-                scrub: 1
+                scrub: 1,
+                invalidateOnRefresh: true // Add this line
               }
             }
           )
-        }
-      )
-
-      ScrollTrigger.create({
-        trigger: document.body,
-        start: 'top top',
-        end: '+=400vh',
-        scrub: 1,
-        onUpdate: self => {
-          const opacityProgress = self.progress
-          heroRef.current.style.opacity = String(1 - opacityProgress)
         }
       })
     },
     { scope: container }
   )
-
-  const array = [
-    '/exhib1/img1.jpg',
-    '/exhib1/img2.jpg',
-    '/exhib1/img3.jpg',
-    '/exhib1/img4.jpg',
-    '/exhib1/img5.jpg',
-    '/exhib1/img6.jpg'
-  ]
 
   return (
     <>
@@ -104,7 +119,12 @@ export default function Showcase() {
               <div
                 key={idx}
                 ref={el => {
-                  pinnedRef.current[idx] = el as HTMLDivElement
+                  if (el) {
+                    pinnedRef.current[idx] = el
+                  } else if (pinnedRef.current[idx]) {
+                    // Clean up ref if element is unmounted
+                    pinnedRef.current[idx] = null!
+                  }
                 }}
                 className={`${styles.card}  ${styles.scroll}`}
               >

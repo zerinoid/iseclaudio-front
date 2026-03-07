@@ -38,7 +38,7 @@ const GalleryWrapper: FC<Props> = ({ workType }) => {
             {currentWork[workType].title}
           </h1>
           <WorkListing works={currentWork[workType].data} workType={workType} />
-          <p className="md:pt-16 md:border-t-2 border-white md:w-11/12 hidden md:block md:text-2xl">
+          <p className="md:pt-16 md:border-t-2 border-white md:w-11/12 hidden md:block md:text-[17px]">
             {currentWork[workType].currentData?.caption}
           </p>
         </div>
