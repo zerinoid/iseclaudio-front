@@ -120,7 +120,13 @@ export default function Gallery({ currentWork }: Props) {
               className={`${styles.card} ${className}`}
             >
               <div className={styles.img}>
-                <Image src={pic} alt={pic} width={800} height={700} />
+                <Image
+                  src={pic}
+                  alt={pic}
+                  width={800}
+                  height={700}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw"
+                />
               </div>
             </div>
           )
