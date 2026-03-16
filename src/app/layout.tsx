@@ -29,7 +29,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${instrumentSerif.className} antialiased`}>
         <Header />
-        <main className="container pt-5 flex-auto">{children}</main>
+        <main className="container pt-5 flex-auto pb-20">{children}</main>
         <Footer />
         <Toaster
           mobileOffset={{ bottom: '16px' }}
