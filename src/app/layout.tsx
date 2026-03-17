@@ -1,20 +1,16 @@
 import type { Metadata } from 'next'
-import localFont from 'next/font/local'
 import './globals.css'
 import Header from '@/components/Header/Header'
 import Footer from '@/components/Footer/Footer'
 import { Toaster } from 'sonner'
+import { Inter, Instrument_Serif } from 'next/font/google'
 
-const instrumentSerif = localFont({
-  src: './fonts/InstrumentSerif-Regular.woff2',
-  variable: '--font-geist-sans'
+const instrumentSerif = Instrument_Serif({
+  subsets: ['latin'],
+  variable: '--font-instrument-serif',
+  weight: '400'
 })
-/*
- * const instrumentItalic = localFont({
- *   src: "./fonts/InstrumentSerif-Italic.woff2",
- *   variable: "--font-geist-mono",
- * });
- *  */
+
 export const metadata: Metadata = {
   title: 'Ise Claudio',
   description: 'ise'
