@@ -5,10 +5,15 @@ import Footer from '@/components/Footer/Footer'
 import { Toaster } from 'sonner'
 import { Inter, Instrument_Serif } from 'next/font/google'
 
-const instrumentSerif = Instrument_Serif({
+const fontSerif = Instrument_Serif({
   subsets: ['latin'],
-  variable: '--font-instrument-serif',
+  variable: '--font-serif',
   weight: '400'
+})
+
+const fontSans = Inter({
+  subsets: ['latin'],
+  variable: '--font-sans'
 })
 
 export const metadata: Metadata = {
@@ -23,7 +28,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${instrumentSerif.className} antialiased`}>
+      <body
+        className={`${fontSans.variable} ${fontSerif.variable} antialiased`}
+      >
         <Header />
         <main className="container pt-5 flex-auto pb-20">{children}</main>
         <Footer />
