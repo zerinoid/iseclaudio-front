@@ -42,7 +42,6 @@
 }
 
 .navItem a {
-  text-decoration: none;
   color: hsl(var(--foreground));
 }
 
