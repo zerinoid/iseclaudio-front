@@ -76,8 +76,8 @@ export default function Lightbox({ imageSrc, isOpen, onClose, alt }: Props) {
       setMousePos({ x, y })
 
       // Apply parallax transform
-      const offsetX = x * 30 // Adjust range as needed
-      const offsetY = y * 30
+      const offsetX = x * 180 // Adjust range as needed
+      const offsetY = y * 360
 
       gsap.to(imageRef.current, {
         x: offsetX,
@@ -133,16 +133,13 @@ export default function Lightbox({ imageSrc, isOpen, onClose, alt }: Props) {
           ✕
         </button>
 
-        <div
-          ref={imageWrapperRef}
-          className={styles.imageWrapper}
-        >
+        <div ref={imageWrapperRef} className={styles.imageWrapper}>
           <div ref={imageRef} className={styles.imageContainer}>
             <Image
               src={imageSrc}
               alt={alt}
               fill
-              sizes="(max-width: 768px) 100vw, 90vw"
+              sizes="(max-width: 100vw) 100vw, 90vw"
               className={styles.image}
               priority
             />
