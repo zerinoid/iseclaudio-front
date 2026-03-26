@@ -98,7 +98,7 @@ const Contact: FC = () => {
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className="text-2xl text-red-600" />
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -115,7 +115,7 @@ const Contact: FC = () => {
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className="text-2xl text-red-600" />
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -133,7 +133,7 @@ const Contact: FC = () => {
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className="text-2xl text-red-600" />
+                <FormMessage />
               </FormItem>
             )}
           />
