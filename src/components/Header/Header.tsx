@@ -6,6 +6,7 @@ import styles from './Header.module.css'
 import Link from 'next/link'
 import logo from '#/ise_logo.svg'
 import instagram from '#/instagram.svg'
+import { ActivityLink } from '../ActivityLink/ActivityLink'
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -54,39 +55,39 @@ const Header = () => {
           }`}
         >
           <li className={styles.navItem}>
-            <Link onClick={closeMenu} href="/">
+            <ActivityLink onClick={closeMenu} href="/">
               HOME
-            </Link>
+            </ActivityLink>
           </li>
           <li className={styles.navItem}>
-            <Link onClick={closeMenu} href="/bio">
+            <ActivityLink onClick={closeMenu} href="/bio">
               BIO
-            </Link>
+            </ActivityLink>
           </li>
           <li className={styles.navItem}>
-            <Link onClick={closeMenu} href="/exhibitions">
+            <ActivityLink onClick={closeMenu} href="/exhibitions">
               EXHIBITIONS
-            </Link>
+            </ActivityLink>
           </li>
           <li className={styles.navItem}>
-            <Link onClick={closeMenu} href="/projects">
+            <ActivityLink onClick={closeMenu} href="/projects">
               PROJECTS
-            </Link>
+            </ActivityLink>
           </li>
           {/* <li className={styles.navItem}>
-              <Link onClick={closeMenu} href="/subscribe">
+              <ActivityLink onClick={closeMenu} href="/subscribe">
               SUBSCRIBE
-              </Link>
+              </ActivityLink>
               </li> */}
           <li className={styles.navItem}>
-            <Link onClick={closeMenu} href="/contact">
+            <ActivityLink onClick={closeMenu} href="/contact">
               CONTACT
-            </Link>
+            </ActivityLink>
           </li>
           {/* <li className={styles.navItem}>
-              <Link onClick={closeMenu} href="shop">
+              <ActivityLink onClick={closeMenu} href="shop">
               SHOP
-              </Link>
+              </ActivityLink>
               </li> */}
           <li>
             <a
