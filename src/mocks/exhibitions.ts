@@ -3,7 +3,8 @@ import Work from '@/models/Work'
 const exhibitions: Work[] = [
   {
     name: 'o que eu faço quando ninguém esta olhando',
-    caption: 'Caption caption caption caption caption ',
+    caption:
+      'O que eu faço quando ninguém esta olhando - Praça das Artes - São Paulo - Brasil',
     id: 1,
     images: [
       '/exhib1/img01.webp',
@@ -31,7 +32,7 @@ const exhibitions: Work[] = [
   },
   {
     name: 'Corpo Humano',
-    caption: 'Caption caption caption caption caption ',
+    caption: 'Corpo Urbano -  Centro Cultural  Cegás – Fortaleza – CE - Brasil',
     id: 2,
     images: [
       '/exhib2/img01.webp',
@@ -46,7 +47,7 @@ const exhibitions: Work[] = [
   },
   {
     name: 'Cartel011',
-    caption: 'Caption caption caption caption caption ',
+    caption: 'Crua Ocupa - Cartel 011 - São Paulo - Brasil',
     id: 3,
     images: [
       '/exhib3/img01.webp',

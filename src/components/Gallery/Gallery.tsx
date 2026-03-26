@@ -25,7 +25,9 @@ export default function Gallery({ currentWork }: Props) {
   const pinnedRef = useRef<HTMLDivElement[]>([])
 
   const [isLightboxOpen, setIsLightboxOpen] = useState(false)
-  const [selectedImagePath, setSelectedImagePath] = useState<string | null>(null)
+  const [selectedImagePath, setSelectedImagePath] = useState<string | null>(
+    null
+  )
 
   const images = currentWork.images
 
@@ -142,7 +144,13 @@ export default function Gallery({ currentWork }: Props) {
                 onClick={() => handleImageClick(pic)}
                 style={{ cursor: 'pointer' }}
               >
-                <Image src={pic} alt={pic} width={800} height={700} />
+                <Image
+                  src={pic}
+                  alt={pic}
+                  width={800}
+                  height={700}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw"
+                />
               </div>
             </div>
           )
