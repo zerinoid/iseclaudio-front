@@ -1,11 +1,12 @@
 'use client'
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import Image from 'next/image'
 import styles from './Gallery.module.css'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
+import Lightbox from '@/components/Lightbox/Lightbox'
 
 import Work from '@/models/Work'
 
@@ -23,7 +24,22 @@ export default function Gallery({ currentWork }: Props) {
   const lastCard = useRef<HTMLDivElement>(null)
   const pinnedRef = useRef<HTMLDivElement[]>([])
 
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false)
+  const [selectedImagePath, setSelectedImagePath] = useState<string | null>(
+    null
+  )
+
   const images = currentWork.images
+
+  const handleImageClick = (imagePath: string) => {
+    setSelectedImagePath(imagePath)
+    setIsLightboxOpen(true)
+  }
+
+  const handleCloseLightbox = () => {
+    setIsLightboxOpen(false)
+    setSelectedImagePath(null)
+  }
 
   // Clean up ScrollTriggers when the component updates or unmounts
   useEffect(() => {
@@ -119,7 +135,11 @@ export default function Gallery({ currentWork }: Props) {
               }}
               className={`${styles.card} ${className}`}
             >
-              <div className={styles.img}>
+              <div
+                className={styles.img}
+                onClick={() => handleImageClick(pic)}
+                style={{ cursor: 'pointer' }}
+              >
                 <Image
                   src={pic}
                   alt={pic}
@@ -133,6 +153,15 @@ export default function Gallery({ currentWork }: Props) {
         })}
         <div ref={footer} className={styles.footer}></div>
       </div>
+
+      {selectedImagePath && (
+        <Lightbox
+          imageSrc={selectedImagePath}
+          isOpen={isLightboxOpen}
+          onClose={handleCloseLightbox}
+          alt="Expanded image view"
+        />
+      )}
     </section>
   )
 }
