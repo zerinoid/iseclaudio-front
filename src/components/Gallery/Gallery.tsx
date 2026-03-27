@@ -34,15 +34,11 @@ export default function Gallery({ currentWork }: Props) {
   const handleImageClick = (imagePath: string) => {
     setSelectedImagePath(imagePath)
     setIsLightboxOpen(true)
-    // Pause all ScrollTriggers
-    ScrollTrigger.getAll().forEach(trigger => trigger.disable())
   }
 
   const handleCloseLightbox = () => {
     setIsLightboxOpen(false)
     setSelectedImagePath(null)
-    // Resume all ScrollTriggers
-    ScrollTrigger.getAll().forEach(trigger => trigger.enable())
   }
 
   // Clean up ScrollTriggers when the component updates or unmounts

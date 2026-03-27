@@ -32,6 +32,8 @@ export default function Lightbox({ imageSrc, isOpen, onClose, alt }: Props) {
   useEffect(() => {
     if (!isOpen || !overlayRef.current) return
 
+    document.documentElement.style.overflowY = 'hidden'
+    document.body.style.overflowY = 'hidden'
     // Fade in animation
     gsap.fromTo(
       overlayRef.current,
@@ -55,7 +57,11 @@ export default function Lightbox({ imageSrc, isOpen, onClose, alt }: Props) {
     }
 
     window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
+    return () => {
+      document.documentElement.style.overflowY = 'auto'
+      document.body.style.overflowY = 'auto'
+      window.removeEventListener('keydown', handleKeyDown)
+    }
   }, [isOpen])
 
   // Handle mouse movement for parallax on desktop
