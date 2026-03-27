@@ -17,7 +17,6 @@
 .nav {
   width: 100%;
   padding: 1rem;
-  z-index: 9999;
 }
 
 .navList {
@@ -51,7 +50,6 @@
   position: absolute;
   top: 22px;
   right: 27px;
-  z-index: 2000;
   flex-direction: column;
   justify-content: space-between;
   width: 25px;
