@@ -16,7 +16,6 @@ export default function Lightbox({ imageSrc, isOpen, onClose, alt }: Props) {
   const imageWrapperRef = useRef<HTMLDivElement>(null)
   const imageRef = useRef<HTMLDivElement>(null)
   const [isMobile, setIsMobile] = useState(false)
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
 
   // Detect if device is mobile
   useEffect(() => {
@@ -79,11 +78,9 @@ export default function Lightbox({ imageSrc, isOpen, onClose, alt }: Props) {
       const x = (e.clientX - rect.left - centerX) / centerX
       const y = (e.clientY - rect.top - centerY) / centerY
 
-      setMousePos({ x, y })
-
       // Apply parallax transform
       const offsetX = x * 180 // Adjust range as needed
-      const offsetY = y * 360
+      const offsetY = y * 300
 
       gsap.to(imageRef.current, {
         x: offsetX,
@@ -116,10 +113,8 @@ export default function Lightbox({ imageSrc, isOpen, onClose, alt }: Props) {
     })
   }
 
-  const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.target === overlayRef.current) {
-      handleClose()
-    }
+  const handleOverlayClick = () => {
+    handleClose()
   }
 
   if (!isOpen) return null
@@ -145,7 +140,7 @@ export default function Lightbox({ imageSrc, isOpen, onClose, alt }: Props) {
               src={imageSrc}
               alt={alt}
               fill
-              sizes="(max-width: 100vw) 100vw, 90vw"
+              sizes="(max-width: 768px) 100vw, 90vw"
               className={styles.image}
               priority
             />
